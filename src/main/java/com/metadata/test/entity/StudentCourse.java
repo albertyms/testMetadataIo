@@ -1,6 +1,7 @@
 package com.metadata.test.entity;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -10,7 +11,6 @@ import java.util.Objects;
 @Table(name = "student_course", schema="metadataio")
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class StudentCourse {
 
@@ -18,11 +18,13 @@ public class StudentCourse {
     @Id
     @Column(name = "id")
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = false)
+    @JsonIgnore
     private Student student;
-    @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false)
+    @JsonIgnore
     private Course course;
 
     @Override

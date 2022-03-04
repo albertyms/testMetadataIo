@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "students", schema="metadataio")
+@Table(name = "students", schema = "metadataio")
 @Getter
 @Setter
 @ToString

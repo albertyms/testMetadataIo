@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -70,6 +67,41 @@ public class StudentCourseController {
             studentCourseEntity.setCourse(course.get());
             return ResponseEntity.ok(studentCourseService.create(studentCourseEntity));
 
+        } catch (Exception e) {
+            logger.error(ERROR_PROCESS, e);
+            return new ResponseEntity<>(ERROR_REQUEST, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/course-by-student/{id}")
+    public ResponseEntity<Object> findByStudentId(@PathVariable Long id) {
+        try {
+            Optional<Student> student = studentService.findById(id);
+
+            if(!student.isPresent()) {
+                return  new ResponseEntity<>("This student not exists", HttpStatus.NOT_FOUND);
+            } else {
+                Iterable<StudentCourse> studentCourses = studentCourseService.findByStudent(student.get());
+                return ResponseEntity.ok(studentCourses);
+            }
+
+        } catch (Exception e) {
+            logger.error(ERROR_PROCESS, e);
+            return new ResponseEntity<>(ERROR_REQUEST, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/student-by-course/{id}")
+    public ResponseEntity<Object> findByCourseId(@PathVariable Long id) {
+        try {
+            Optional<Course> course = courseService.findById(id);
+
+            if(!course.isPresent()) {
+                return  new ResponseEntity<>("This student not exists", HttpStatus.NOT_FOUND);
+            } else {
+                Iterable<StudentCourse> studentCourses = studentCourseService.findByCourse(course.get());
+                return ResponseEntity.ok(studentCourses);
+            }
         } catch (Exception e) {
             logger.error(ERROR_PROCESS, e);
             return new ResponseEntity<>(ERROR_REQUEST, HttpStatus.BAD_REQUEST);

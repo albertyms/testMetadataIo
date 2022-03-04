@@ -33,7 +33,8 @@ public class StudentController {
                 Student student = new Student();
                 student.setFullName(request.getFullName());
                 student.setNumberId(request.getNumberId());
-                return ResponseEntity.ok(service.create(student));
+                student = service.create(student);
+                return ResponseEntity.ok(student);
             }
         } catch (Exception e) {
             logger.error(ERROR_PROCESS, e);

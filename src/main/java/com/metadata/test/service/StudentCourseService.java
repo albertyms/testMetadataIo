@@ -22,4 +22,8 @@ public interface StudentCourseService {
 
     Integer numCourseByStudent(Student student);
 
+    Iterable<StudentCourse> findByStudent(Student student);
+
+    Iterable<StudentCourse> findByCourse(Course course);
+
 }
