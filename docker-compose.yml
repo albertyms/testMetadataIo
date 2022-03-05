@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  app:
+    container_name: app-metadatatest
+    image: app-metadatatest
+    build: ./
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysqldb
+  mysqldb:
+    image: mysql:8
+    ports:
+      - 3307:3306
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=root-app
+      - MYSQL_DATABASE=metadataio
