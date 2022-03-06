@@ -12,6 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class StudentCourse {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
