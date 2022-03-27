@@ -519,3 +519,7 @@ INSERT INTO metadataio.courses (id, name_course, code_course,number_student) VAL
 INSERT INTO metadataio.courses (id, name_course, code_course,number_student) VALUES('18','History','History-49d3',0);
 INSERT INTO metadataio.courses (id, name_course, code_course,number_student) VALUES('19','Math III','MathIII-1136',0);
 INSERT INTO metadataio.courses (id, name_course, code_course,number_student) VALUES('20','Art II','ArtII-e810',0);
+
+INSERT INTO metadataio.roles(name) VALUES('ROLE_USER');
+INSERT INTO metadataio.roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO metadataio.roles(name) VALUES('ROLE_ADMIN');
